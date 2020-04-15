@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from "../store/index.js";
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Layout from '../views/Layout'
@@ -11,7 +12,11 @@ const routes = [{
     children: [{
       path: 'home',
       name: 'Home',
-      component: () => import('../views/Home')
+      component: () => import('../views/Home'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_USER"
+      }
     }, {
       path: 'about',
       name: 'About',
@@ -20,13 +25,7 @@ const routes = [{
       path: 'contact',
       name: 'Contact',
       component: () => import('../views/Contact')
-    }],
-    beforeEnter(to, from, next) {
-      if (!localStorage.getItem('authenticated')) {
-        next("/login");
-      }
-      next();
-    }
+    }]
   },
   {
     path: '/login',
@@ -46,5 +45,23 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      console.log(store.getters.getRoles)
+      if (store.getters.getRoles == to.meta.role) {
+        console.log("success")
+        next();
+        return;
+      } else {
+        from;
+      }
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
 
 export default router

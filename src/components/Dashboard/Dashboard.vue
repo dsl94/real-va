@@ -41,7 +41,7 @@
         <v-toolbar-title>Real VA</v-toolbar-title>
 
         <v-spacer></v-spacer>Logout
-        <v-btn icon @click="handleLogout">
+        <v-btn icon @click="logout">
           <v-icon>mdi-export</v-icon>
         </v-btn>
       </v-app-bar>
@@ -64,10 +64,11 @@ export default {
     };
   },
   methods: {
-    handleLogout() {
-      localStorage.removeItem("authentificated");
-      this.$router.push("/login");
-    }
+    logout: function() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    },
   }
 };
 </script>

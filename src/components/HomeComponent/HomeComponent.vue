@@ -6,7 +6,15 @@
 
 <script>
 export default {
-  name: "HomeComponent"
+  name: "HomeComponent",
+  methods: {
+    load() {
+      console.log(this.$store.getters.getRoles)
+    }
+  },
+  beforeMount() {
+    this.load();
+  }
 };
 </script>
 

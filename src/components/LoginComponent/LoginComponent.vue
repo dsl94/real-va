@@ -2,48 +2,34 @@
   <v-flex id="app">
     <v-app id="inspire">
       <v-content>
-        <v-container fluid fill-height>
-          <v-layout align-center justify-center>
-            <v-flex xs12 sm8 md4>
-              <v-card-title class="title">
-                <h1 class="header">Login</h1>
-              </v-card-title>
-              <v-card class="elevation-12">
-                <v-toolbar color="primary" dark flat>
-                  <v-toolbar-title>
-                    <v-flex class="d-flex justify-space-between full-content">
-                      <div></div>
-                      <div class="btnRegister" @click="redirect">Register</div>
-                    </v-flex>
-                  </v-toolbar-title>
-                  <v-spacer></v-spacer>
-                </v-toolbar>
-                <v-card-text>
-                  <v-form>
-                    <v-text-field
-                      label="Username"
-                      name="username"
-                      prepend-icon="person"
-                      type="text"
-                      v-model="username"
-                    ></v-text-field>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
+              <v-form @submit.prevent="login" class="login">
+                <v-card class="elevation-12">
+                  <v-toolbar color="primary" dark flat>
+                    <v-toolbar-title>Login</v-toolbar-title>
+                    <v-spacer />
+                  </v-toolbar>
+                  <v-card-text>
+                    <v-text-field label="Login" name="login" type="text" v-model="username" />
+
                     <v-text-field
                       id="password"
                       label="Password"
                       name="password"
-                      prepend-icon="lock"
                       type="password"
                       v-model="password"
-                    ></v-text-field>
-                  </v-form>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="submit">Login</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
+                    />
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn type="submit" color="primary">Login</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-form>
+            </v-col>
+          </v-row>
         </v-container>
       </v-content>
     </v-app>
@@ -52,47 +38,30 @@
 
 <script>
 export default {
-  name: "LoginComponent",
-  data: () => {
+  data() {
     return {
-      username: null,
-      password: null
+      username: "",
+      password: ""
     };
   },
   methods: {
-    submit() {
-      if (this.username && this.password) {
-        localStorage.setItem("authenticated", "true");
-        this.$router.push("home");
-        return true;
-      }
-      return false;
-    },
-
     redirect() {
-      this.$router.push("/register");
+    let roles = this.$store.getters.getRoles;
+    if (roles == "ROLE_ADMIN") {
+      this.$router.push("/admin");
+    } else {
+      this.$router.push("/");
+    }
+  },
+    login() {
+      let username = this.username;
+      let password = this.password;
+
+      this.$store
+        .dispatch("login", { username, password })
+        .then(() => this.redirect())
+        .catch(err => console.log(err));
     }
   }
 };
 </script>
-
-<style>
-.full-content {
-  width: 35rem;
-}
-
-.title {
-  padding-left: 0 !important ;
-  padding-bottom: 1rem !important;
-}
-
-.header {
-  color: #1976d2;
-  font-size: 5rem;
-  height: 3rem;
-}
-
-.btnRegister {
-  cursor: pointer;
-}
-</style>
