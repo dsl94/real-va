@@ -17,7 +17,17 @@ const routes = [{
         requiresAuth: true,
         role: "ROLE_USER"
       }
-    }, {
+    }, 
+    {
+      path: 'profile',
+      name: 'Profile',
+      component: () => import('../views/Profile'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_USER"
+      }
+    }, 
+    {
       path: 'about',
       name: 'About',
       component: () => import('../views/About')

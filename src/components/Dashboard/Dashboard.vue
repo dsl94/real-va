@@ -3,13 +3,13 @@
     <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
-          <router-link class="link" to="home">
+          <router-link class="link" to="profile">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>home</v-icon>
+                <v-icon>perm_identity</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Home</v-list-item-title>
+                <v-list-item-title>Profile</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </router-link>

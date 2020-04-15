@@ -50,7 +50,7 @@ export default {
     if (roles == "ROLE_ADMIN") {
       this.$router.push("/admin");
     } else {
-      this.$router.push("/");
+      this.$router.push("/profile");
     }
   },
     login() {

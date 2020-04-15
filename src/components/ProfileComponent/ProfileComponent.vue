@@ -1,0 +1,67 @@
+<template>
+  <div class="app">
+      <v-form
+    ref="form"
+  >
+    <v-text-field
+      v-model="user.fullName"
+      label="Full name"
+      readonly
+    ></v-text-field>
+
+    <v-text-field
+      v-model="user.email"
+      label="E-mail"
+      readonly
+    ></v-text-field>
+
+    <v-text-field
+      v-model="user.userName"
+      label="Username"
+      readonly
+    ></v-text-field>
+
+     <v-text-field
+      v-model="user.secretCode"
+      label="Secret code"
+      readonly
+    ></v-text-field>
+  </v-form>
+  </div>
+</template>
+
+<script>
+import Constants from "../../constants"
+import axios from "axios";
+
+export default {
+  name: "ProfileComponent",
+  data() {
+      return {
+          user: {
+              fullName: '',
+              email: '',
+              userName: '',
+              secretCode: ''
+          }
+      }
+  },
+  methods: {
+    load() {
+      axios.get(Constants.API_BASE + "user/profile").then(resp => {
+        this.user = resp.data;
+      });
+    }
+  },
+  beforeMount() {
+    this.load();
+  }
+};
+</script>
+
+
+<style>
+.app {
+  padding: 2rem;
+}
+</style>
