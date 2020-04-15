@@ -1,50 +1,35 @@
 <template>
   <div class="app">
-      <v-form
-    ref="form"
-  >
-    <v-text-field
-      v-model="user.fullName"
-      label="Full name"
-      readonly
-    ></v-text-field>
+    <v-form ref="form">
+      <v-text-field v-model="user.fullName" label="Full name" readonly ></v-text-field>
 
-    <v-text-field
-      v-model="user.email"
-      label="E-mail"
-      readonly
-    ></v-text-field>
+      <v-text-field v-model="user.email" label="E-mail" readonly ></v-text-field>
 
-    <v-text-field
-      v-model="user.userName"
-      label="Username"
-      readonly
-    ></v-text-field>
+      <v-text-field v-model="user.userName" label="Username" readonly></v-text-field>
 
-     <v-text-field
-      v-model="user.secretCode"
-      label="Secret code"
-      readonly
-    ></v-text-field>
-  </v-form>
+      <v-text-field v-model="user.secretCode" label="Secret code" readonly></v-text-field>
+    </v-form>
+    
+    <FlightsComponent :username="$store.getters.getUsername"/>
   </div>
 </template>
 
 <script>
-import Constants from "../../constants"
+import Constants from "../../constants";
 import axios from "axios";
+import FlightsComponent from "../FlightsComponent"
 
 export default {
   name: "ProfileComponent",
   data() {
-      return {
-          user: {
-              fullName: '',
-              email: '',
-              userName: '',
-              secretCode: ''
-          }
+    return {
+      user: {
+        fullName: "",
+        email: "",
+        userName: "",
+        secretCode: ""
       }
+    };
   },
   methods: {
     load() {
@@ -55,6 +40,9 @@ export default {
   },
   beforeMount() {
     this.load();
+  },
+  components: {
+      FlightsComponent
   }
 };
 </script>
