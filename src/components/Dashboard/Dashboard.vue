@@ -3,7 +3,7 @@
     <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
-          <router-link class="link" to="profile">
+          <router-link class="link" to="profile" v-if="$store.getters.getRoles == 'ROLE_USER'">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
                 <v-icon>perm_identity</v-icon>
@@ -13,7 +13,17 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
-          <router-link class="link" to="contact">
+           <router-link class="link" to="users" v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'">
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>perm_identity</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Users</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
+          <!-- <router-link class="link" to="contact">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
                 <v-icon>contact_mail</v-icon>
@@ -32,7 +42,7 @@
                 <v-list-item-title>About</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </router-link>
+          </router-link> -->
         </v-list>
       </v-navigation-drawer>
 

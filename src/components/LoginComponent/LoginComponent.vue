@@ -47,8 +47,8 @@ export default {
   methods: {
     redirect() {
     let roles = this.$store.getters.getRoles;
-    if (roles == "ROLE_ADMIN") {
-      this.$router.push("/admin");
+    if (roles == "ROLE_SYSTEM_ADMIN") {
+      this.$router.push("/users");
     } else {
       this.$router.push("/profile");
     }

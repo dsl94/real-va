@@ -28,6 +28,15 @@ const routes = [{
       }
     }, 
     {
+      path: 'users',
+      name: 'Users',
+      component: () => import('../views/Admin/Users'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_SYSTEM_ADMIN"
+      }
+    }, 
+    {
       path: 'about',
       name: 'About',
       component: () => import('../views/About')
