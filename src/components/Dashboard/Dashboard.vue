@@ -50,12 +50,16 @@
         </v-list>
         <div class="metar">
           <v-text-field
-            label="Request metar - ICAO"
+            label="ICAO"
             name="login"
             type="text"
             v-model="icao"
             @keyup.enter.native="getMetar"
-          />
+          >
+            <template v-slot:append>
+              <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
+            </template>
+          </v-text-field>
           <span class="font-weight-bold caption">{{this.metar.raw}}</span>
         </div>
       </v-navigation-drawer>
