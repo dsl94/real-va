@@ -74,11 +74,19 @@ export default {
     };
   },
   methods: {
+    checkLogin() {
+        if (this.$store.getters.getUsername === undefined) {
+          this.$router.push('/login');
+        }
+      },
     logout: function() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
     },
+  },
+  beforeMount() {
+    this.checkLogin();
   }
 };
 </script>
