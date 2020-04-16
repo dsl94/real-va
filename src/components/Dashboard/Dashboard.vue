@@ -13,7 +13,11 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
-           <router-link class="link" to="users" v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'">
+          <router-link
+            class="link"
+            to="users"
+            v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
+          >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
                 <v-icon>perm_identity</v-icon>
@@ -42,8 +46,18 @@
                 <v-list-item-title>About</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </router-link> -->
+          </router-link>-->
         </v-list>
+        <div class="metar">
+          <v-text-field
+            label="Request metar - ICAO"
+            name="login"
+            type="text"
+            v-model="icao"
+            @keyup.enter.native="getMetar"
+          />
+          <span class="font-weight-bold caption">{{this.metar.raw}}</span>
+        </div>
       </v-navigation-drawer>
 
       <v-app-bar app color="indigo" dark>
@@ -66,24 +80,42 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Dashboard",
   data: () => {
     return {
-      drawer: null
+      drawer: null,
+      icao: "",
+      metar: ""
     };
   },
   methods: {
+    getMetar() {
+      let aut = axios.defaults.headers.common["Authorization"];
+      delete axios.defaults.headers.common["Authorization"];
+      axios
+        .get(
+          "https://avwx.rest/api/metar/" +
+            this.icao +
+            "?token=AduMGyDf-aOdLLthklnQ-WGWCwE8RLfaxGRZBBOX3hI",
+          { Headers: { Authorization: null } }
+        )
+        .then(resp => {
+          this.metar = resp.data;
+        });
+      axios.defaults.headers.common["Authorization"] = aut;
+    },
     checkLogin() {
-        if (this.$store.getters.getUsername === undefined) {
-          this.$router.push('/login');
-        }
-      },
+      if (this.$store.getters.getUsername === undefined) {
+        this.$router.push("/login");
+      }
+    },
     logout: function() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
-    },
+    }
   },
   beforeMount() {
     this.checkLogin();
@@ -106,5 +138,9 @@ export default {
   color: black !important;
   text-decoration: none;
   display: flex;
+}
+
+.metar {
+  padding: 5px;
 }
 </style>
