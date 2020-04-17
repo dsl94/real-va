@@ -20,6 +20,10 @@ const app = express();
 const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
 
 app.use(staticFileMiddleware);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(history({
   disableDotRule: true,
   verbose: true
