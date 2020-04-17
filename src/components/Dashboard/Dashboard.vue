@@ -3,6 +3,20 @@
     <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
+          <div class="metar">
+          <v-text-field
+            label="ICAO"
+            name="login"
+            type="text"
+            v-model="icao"
+            @keyup.enter.native="getMetar"
+          >
+            <template v-slot:append>
+              <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
+            </template>
+          </v-text-field>
+          <span class="font-weight-bold caption">{{this.metar.raw}}</span>
+        </div>
           <router-link class="link" to="profile" v-if="$store.getters.getRoles == 'ROLE_USER'">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
@@ -27,6 +41,20 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
+          <router-link
+            class="link"
+            to="flights"
+            v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
+          >
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>airplanemode_active</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>All flights</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
           <!-- <router-link class="link" to="contact">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
@@ -48,20 +76,6 @@
             </v-list-item>
           </router-link>-->
         </v-list>
-        <div class="metar">
-          <v-text-field
-            label="ICAO"
-            name="login"
-            type="text"
-            v-model="icao"
-            @keyup.enter.native="getMetar"
-          >
-            <template v-slot:append>
-              <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
-            </template>
-          </v-text-field>
-          <span class="font-weight-bold caption">{{this.metar.raw}}</span>
-        </div>
       </v-navigation-drawer>
 
       <v-app-bar app color="indigo" dark>

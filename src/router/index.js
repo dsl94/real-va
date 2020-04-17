@@ -37,6 +37,15 @@ const routes = [{
       }
     }, 
     {
+      path: 'flights',
+      name: 'Flights',
+      component: () => import('../views/Admin/Flights'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_SYSTEM_ADMIN"
+      }
+    }, 
+    {
       path: 'about',
       name: 'About',
       component: () => import('../views/About')

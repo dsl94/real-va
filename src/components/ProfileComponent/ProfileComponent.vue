@@ -10,7 +10,7 @@
       <v-text-field v-model="user.secretCode" label="Secret code" readonly></v-text-field>
     </v-form>
     
-    <FlightsComponent :username="$store.getters.getUsername"/>
+    <FlightsComponent :username="$store.getters.getUsername" all="false"/>
   </div>
 </template>
 

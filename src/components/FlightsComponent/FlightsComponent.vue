@@ -12,6 +12,8 @@
             <th class="text-left">End time</th>
             <th class="text-left">Length</th>
             <th class="text-left">Aircraft</th>
+            <th v-if="all=='true'" class="text-left">User</th>
+            <th v-else class="text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +24,8 @@
             <td>{{ flight.endTime }}</td>
             <td>{{ flight.length }}</td>
             <td>{{ flight.aircraft }}</td>
+            <td v-if="all=='true'">{{flight.user}}</td>
+            <td v-else><v-icon color="red" @click="deleteFlight(flight.id)">delete</v-icon></td>
           </tr>
         </tbody>
       </template>
@@ -38,14 +42,28 @@ export default {
       flights: []
     };
   },
-  props: ["username"],
+  props: ["username", "all"],
   methods: {
     loadFlights() {
+      let url = "flight/all/" + this.username;
+      if (this.username === undefined || this.username === 'undefined' || this.username === null || this.username == '') {
+        url = "flight/all";
+      }
       axios
-        .get(Constants.API_BASE + "flight/all/" + this.username)
+        .get(Constants.API_BASE + url)
         .then(resp => {
           this.flights = resp.data;
         });
+    },
+    deleteFlight(id) {
+      if (confirm("Are you sure you want to delete")) {
+      axios
+        .delete(Constants.API_BASE + "flight/" + id)
+        .then(resp => {
+          resp;
+          this.loadFlights();
+        });
+      }
     }
   },
   beforeMount() {
