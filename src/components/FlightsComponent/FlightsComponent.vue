@@ -12,7 +12,7 @@
             <th class="text-left">End time</th>
             <th class="text-left">Length</th>
             <th class="text-left">Aircraft</th>
-            <th class="text-left">Fuel spend</th>
+            <th class="text-left">Fuel spent</th>
             <th v-if="all=='true'" class="text-left">User</th>
             <th v-else class="text-left">Actions</th>
           </tr>
