@@ -25,7 +25,7 @@
             <td>{{ flight.endTime }}</td>
             <td>{{ flight.length }}</td>
             <td>{{ flight.aircraft }}</td>
-            <td>{{ flight.fuelSpent }}</td>
+            <td>{{ flight.fuelSpent.toFixed(2) }}</td>
             <td v-if="all=='true'">{{flight.user}}</td>
             <td v-else><v-icon color="red" @click="deleteFlight(flight.id)">delete</v-icon></td>
           </tr>
