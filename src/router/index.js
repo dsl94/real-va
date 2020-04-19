@@ -55,6 +55,15 @@ const routes = [{
       }
     }, 
     {
+      path: 'buy-aircraft',
+      name: 'BuyAircraft',
+      component: () => import('../views/Airline/BuyAircraft'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_ADMIN"
+      }
+    }, 
+    {
       path: 'users',
       name: 'Users',
       component: () => import('../views/Admin/Users'),
