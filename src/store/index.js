@@ -38,6 +38,9 @@ export default new Vuex.Store({
       state.status = "";
       state.token = "";
     },
+    airlineJoined(state, airline) {
+      state.user.airlineIcao = airline
+    }
   },
   actions: {
     login({ commit }, user) {
@@ -50,9 +53,13 @@ export default new Vuex.Store({
             const user = {
               username: resp.data.username,
               roles: resp.data.roles,
+              airlineName: resp.data.airlineName,
+              airlineIcao: resp.data.airlineIcao
             };
             localStorage.setItem("username", user.username);
             localStorage.setItem("roles", user.roles);
+            localStorage.setItem("airlineName", user.airlineName);
+            localStorage.setItem("airlineIcao", user.airlineIcao);
             axios.defaults.headers.common["Authorization"] = token;
             commit("auth_success", { token, user });
             resolve(resp);
@@ -89,12 +96,17 @@ export default new Vuex.Store({
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         localStorage.removeItem("roles");
+        localStorage.removeItem("airlineName");
+        localStorage.removeItem("airlineIcao");
         window.localStorage.clear();
         localStorage.clear();
         delete axios.defaults.headers.common["Authorization"];
         resolve();
       });
     },
+    joinedAirline({ commit }, airline) {
+      commit("airlineJoined", airline);
+    }
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
@@ -104,6 +116,12 @@ export default new Vuex.Store({
     },
     getUsername: (state) => {
       return state.user.username;
+    },
+    getAirlineName: (state) => {
+      return state.user.airlineName;
+    },
+    getAirlineIcao: (state) => {
+      return state.user.airlineIcao;
     },
   },
 });

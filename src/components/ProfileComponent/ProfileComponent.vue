@@ -8,6 +8,8 @@
       <v-text-field v-model="user.userName" label="Username" readonly></v-text-field>
 
       <v-text-field v-model="user.secretCode" label="Secret code" readonly></v-text-field>
+
+      <v-text-field v-model="user.airline" label="Airline" readonly></v-text-field>
     </v-form>
     
     <FlightsComponent :username="$store.getters.getUsername" all="false"/>
@@ -27,7 +29,8 @@ export default {
         fullName: "",
         email: "",
         userName: "",
-        secretCode: ""
+        secretCode: "",
+        airline: ""
       }
     };
   },

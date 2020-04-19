@@ -24,7 +24,34 @@ const routes = [{
       component: () => import('../views/Profile'),
       meta: {
         requiresAuth: true,
+        roles: ["ROLE_USER", "ROLE_ADMIN"]
+      }
+    }, 
+    {
+      path: 'create-airline',
+      name: 'CreateAirline',
+      component: () => import('../views/Airline/CreateAirline'),
+      meta: {
+        requiresAuth: true,
         role: "ROLE_USER"
+      }
+    }, 
+    {
+      path: 'join-airline',
+      name: 'JoinAirline',
+      component: () => import('../views/Airline/JoinAirline'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_USER"
+      }
+    }, 
+    {
+      path: 'airline-details',
+      name: 'AirlineDetails',
+      component: () => import('../views/Airline/AirlineDetails'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_ADMIN"
       }
     }, 
     {
@@ -82,7 +109,11 @@ router.beforeEach((to, from, next) => {
         console.log("success")
         next();
         return;
+      }else if (store.getters.getRoles.every(elem => to.meta.roles.indexOf(elem) > -1)) {
+        next();
+        return;
       } else {
+        console.log(to.meta.roles);
         from;
       }
     }

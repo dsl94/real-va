@@ -4,20 +4,24 @@
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense>
           <div class="metar">
-          <v-text-field
-            label="ICAO"
-            name="login"
-            type="text"
-            v-model="icao"
-            @keyup.enter.native="getMetar"
+            <v-text-field
+              label="ICAO"
+              name="login"
+              type="text"
+              v-model="icao"
+              @keyup.enter.native="getMetar"
+            >
+              <template v-slot:append>
+                <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
+              </template>
+            </v-text-field>
+            <span class="font-weight-bold caption">{{this.metar.raw}}</span>
+          </div>
+          <router-link
+            class="link"
+            to="profile"
+            v-if="$store.getters.getRoles.every(elem => ['ROLE_USER','ROLE_ADMIN'].indexOf(elem) > -1)"
           >
-            <template v-slot:append>
-              <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
-            </template>
-          </v-text-field>
-          <span class="font-weight-bold caption">{{this.metar.raw}}</span>
-        </div>
-          <router-link class="link" to="profile" v-if="$store.getters.getRoles == 'ROLE_USER'">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
                 <v-icon>perm_identity</v-icon>
@@ -55,26 +59,40 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
-          <!-- <router-link class="link" to="contact">
+          <router-link
+            class="link"
+            to="create-airline"
+            v-if="$store.getters.getAirlineIcao == null"
+          >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>contact_mail</v-icon>
+                <v-icon>airplanemode_active</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Contact</v-list-item-title>
+                <v-list-item-title>Create airline</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </router-link>
-          <router-link class="link" to="about">
+          <router-link class="link" to="join-airline" v-if="$store.getters.getAirlineIcao == null">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>chat_bubble</v-icon>
+                <v-icon>airplanemode_active</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>About</v-list-item-title>
+                <v-list-item-title>Join airline</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </router-link>-->
+          </router-link>
+           <router-link class="link" to="airline-details" v-if="$store.getters.getRoles == 'ROLE_ADMIN'">
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>airplanemode_active</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Airline details</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
         </v-list>
       </v-navigation-drawer>
 

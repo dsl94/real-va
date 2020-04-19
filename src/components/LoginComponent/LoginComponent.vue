@@ -49,8 +49,10 @@ export default {
     let roles = this.$store.getters.getRoles;
     if (roles == "ROLE_SYSTEM_ADMIN") {
       this.$router.push("/users");
-    } else {
+    } else if (roles == "ROLE_USER") {
       this.$router.push("/profile");
+    } else {
+      this.$router.push("/airline-details");
     }
   },
     login() {
