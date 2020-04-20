@@ -1,69 +1,36 @@
 <template>
   <div class="app">
-    <h3>Airline details</h3>
-    <v-form ref="form">
-      <v-text-field v-model="airline.name" label="Airline name" readonly></v-text-field>
+    <v-card>
+      <v-card-title>Airline details</v-card-title>
+      <v-card-text>
+        <v-form ref="form">
+          <v-text-field outlined v-model="airline.name" label="Airline name" readonly></v-text-field>
 
-      <v-text-field v-model="airline.icao" label="Airline icao" readonly></v-text-field>
+          <v-text-field outlined v-model="airline.icao" label="Airline icao" readonly></v-text-field>
 
-      <v-text-field v-model="airline.base" label="Airline base" readonly></v-text-field>
+          <v-text-field outlined v-model="airline.base" label="Airline base" readonly></v-text-field>
 
-      <v-text-field v-model="airline.balance" label="Current balance in $" readonly></v-text-field>
-    </v-form>
-
+          <v-text-field outlined v-model="airline.balance" label="Current balance in $" readonly></v-text-field>
+        </v-form>
+      </v-card-text>
+    </v-card>
     <v-row>
       <v-col cols="12" sm="5">
-        <h3>Pilots</h3>
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">Full name</th>
-                <th class="text-left">Username</th>
-                <th class="text-left">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(pilot, index) in airline.pilots" :key="index">
-                <td>{{ pilot.fullName }}</td>
-                <td>{{ pilot.userName }}</td>
-                <td>{{ pilot.email }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <v-card>
+          <v-card-title>Pilots</v-card-title>
+          <v-data-table :headers="headersPilots" :items="airline.pilots" :items-per-page="10"></v-data-table>
+        </v-card>
       </v-col>
       <v-col cols="12" sm="7">
-        <h3>
-          Fleet
-          <router-link to="buy-aircraft">
-            <v-btn fixed dark fab bottom right color="success">
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
-          </router-link>
-        </h3>
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">Name</th>
-                <th class="text-left">Type</th>
-                <th class="text-left">Location</th>
-                <th class="text-left">Registration</th>
-                <th class="text-left">Capacity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(plane, index) in airline.aircrafts" :key="index">
-                <td>{{ plane.name }}</td>
-                <td>{{ plane.type }}</td>
-                <td>{{ plane.location }}</td>
-                <td>{{ plane.registration }}</td>
-                <td>{{ plane.capacity }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <v-card>
+          <v-card-title>Pilots</v-card-title>
+          <v-data-table :headers="headersPlanes" :items="airline.aircrafts" :items-per-page="10"></v-data-table>
+        </v-card>
+        <router-link to="buy-aircraft">
+          <v-btn fixed dark fab bottom right color="success">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </router-link>
       </v-col>
     </v-row>
   </div>
@@ -82,9 +49,21 @@ export default {
         icao: "",
         base: "",
         balance: 0,
-        planes: [],
+        aircrafts: [],
         pilots: []
-      }
+      },
+      headersPilots: [
+        { text: "Full name", value: "fullName" },
+        { text: "Username", value: "userName" },
+        { text: "Email", value: "email" }
+      ],
+      headersPlanes: [
+        { text: "Name", value: "name" },
+        { text: "Type", value: "type" },
+        { text: "Location", value: "location" },
+        { text: "Registration", value: "registration" },
+        { text: "Capacity", value: "capacity" }
+      ]
     };
   },
   methods: {

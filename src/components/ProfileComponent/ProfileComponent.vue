@@ -1,25 +1,30 @@
 <template>
   <div class="app">
-    <v-form ref="form">
-      <v-text-field v-model="user.fullName" label="Full name" readonly ></v-text-field>
+    <v-card>
+      <v-card-title>Pilot profile</v-card-title>
+      <v-card-text>
+        <v-form ref="form">
+          <v-text-field outlined v-model="user.fullName" label="Full name" readonly></v-text-field>
 
-      <v-text-field v-model="user.email" label="E-mail" readonly ></v-text-field>
+          <v-text-field outlined v-model="user.email" label="E-mail" readonly></v-text-field>
 
-      <v-text-field v-model="user.userName" label="Username" readonly></v-text-field>
+          <v-text-field outlined v-model="user.userName" label="Username" readonly></v-text-field>
 
-      <v-text-field v-model="user.secretCode" label="Secret code" readonly></v-text-field>
+          <v-text-field outlined v-model="user.secretCode" label="Secret code" readonly></v-text-field>
 
-      <v-text-field v-model="user.airline" label="Airline" readonly></v-text-field>
-    </v-form>
-    
-    <FlightsComponent :username="$store.getters.getUsername" all="false"/>
+          <v-text-field outlined v-model="user.airline" label="Airline" readonly></v-text-field>
+        </v-form>
+      </v-card-text>
+    </v-card>
+    <br> 
+    <FlightsComponent :username="$store.getters.getUsername" all="false" />
   </div>
 </template>
 
 <script>
 import Constants from "../../constants";
 import axios from "axios";
-import FlightsComponent from "../FlightsComponent"
+import FlightsComponent from "../FlightsComponent";
 
 export default {
   name: "ProfileComponent",
@@ -45,7 +50,7 @@ export default {
     this.load();
   },
   components: {
-      FlightsComponent
+    FlightsComponent
   }
 };
 </script>

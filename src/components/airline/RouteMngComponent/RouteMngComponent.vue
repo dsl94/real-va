@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <v-btn fixed dark fab bottom right color="success" @click="dialog=true"> 
+    <v-btn fixed dark fab bottom right color="success" @click="dialog=true">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     <RoutesComponent :key="componentKey" />
@@ -14,19 +14,20 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field label="Departure" required v-model="route.departure"></v-text-field>
+                <v-text-field outlined label="Departure" required v-model="route.departure"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field label="Arrival" required v-model="route.arrival"></v-text-field>
+                <v-text-field outlined label="Arrival" required v-model="route.arrival"></v-text-field>
               </v-col>
               <v-col cols="12" sm="4">
-                <v-text-field label="Flight number" required v-model="route.flightNumber"></v-text-field>
+                <v-text-field outlined label="Flight number" required v-model="route.flightNumber"></v-text-field>
               </v-col>
               <v-col cols="12" sm="3">
                 <v-checkbox v-model="route.returnFlight" label="Rreturn?"></v-checkbox>
               </v-col>
               <v-col cols="12" sm="5" v-if="route.returnFlight">
                 <v-text-field
+                  outlined
                   label="Return flight number"
                   required
                   v-model="route.returnFlightNumber"

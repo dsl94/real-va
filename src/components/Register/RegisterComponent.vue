@@ -12,13 +12,14 @@
                     <v-spacer />
                   </v-toolbar>
                   <v-card-text>
-                    <v-text-field label="Username" name="login" type="text" v-model="username" />
+                    <v-text-field outlined label="Username" name="login" type="text" v-model="username" />
 
-                    <v-text-field label="Email" name="email" type="text" v-model="email" />
+                    <v-text-field outlined label="Email" name="email" type="text" v-model="email" />
 
-                    <v-text-field label="Full name" name="fullName" type="text" v-model="fullName" />
+                    <v-text-field outlined label="Full name" name="fullName" type="text" v-model="fullName" />
 
                     <v-text-field
+                    outlined
                       id="password"
                       label="Password"
                       name="password"

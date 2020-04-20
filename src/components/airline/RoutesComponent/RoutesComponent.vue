@@ -1,26 +1,20 @@
 <template>
   <div>
-    <h2>Routes</h2>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Flight number</th>
-            <th class="text-left">Departure</th>
-            <th class="text-left">Arrival</th>
-            <th class="text-left">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(route, index) in routes" :key="index">
-            <td>{{ route.flightNumber }}</td>
-            <td>{{ route.departure }}</td>
-            <td>{{ route.arrival }}</td>
-            <td>{{ route.ticketPrice }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <v-card>
+      <v-card-title>
+        Routes
+        <v-spacer></v-spacer>
+        <v-text-field
+          outlined
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table :headers="headers" :items="routes" :items-per-page="10" :search="search"></v-data-table>
+    </v-card>
   </div>
 </template>
 <script>
@@ -30,7 +24,14 @@ export default {
   name: "RoutesComponent",
   data() {
     return {
-      routes: []
+      routes: [],
+      search: "",
+      headers: [
+        { text: "Flight number", value: "flightNumber" },
+        { text: "Departure", value: "departure" },
+        { text: "Arrival", value: "arrival" },
+        { text: "Price", value: "ticketPrice" }
+      ]
     };
   },
   methods: {

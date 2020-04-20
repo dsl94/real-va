@@ -1,37 +1,19 @@
 <template>
   <div>
-    <h2>Flights</h2>
-
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Departure</th>
-            <th class="text-left">Arrival</th>
-            <th class="text-left">Start time</th>
-            <th class="text-left">End time</th>
-            <th class="text-left">Length</th>
-            <th class="text-left">Aircraft</th>
-            <th class="text-left">Fuel spent</th>
-            <th v-if="all=='true'" class="text-left">User</th>
-            <th v-else class="text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(flight, index) in flights" :key="index">
-            <td>{{ flight.departure }}</td>
-            <td>{{ flight.arrival }}</td>
-            <td>{{ flight.startTime }}</td>
-            <td>{{ flight.endTime }}</td>
-            <td>{{ flight.length }}</td>
-            <td>{{ flight.aircraft }}</td>
-            <td>{{ flight.fuelSpent.toFixed(2) }} kg</td>
-            <td v-if="all=='true'">{{flight.user}}</td>
-            <td v-else><v-icon color="red" @click="deleteFlight(flight.id)">delete</v-icon></td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <v-card>
+      <v-card-title>Flights</v-card-title>
+      <v-data-table :headers="headers" :items="flights" :items-per-page="10">
+        <template v-slot:item.fuelSpent="{ item }">
+          <td>{{ item.fuelSpent.toFixed(2) }} kg</td>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <td v-if="all=='true'">{{item.user}}</td>
+          <td v-else>
+            <v-icon color="red" @click="deleteFlight(item.id)">delete</v-icon>
+          </td>
+        </template>
+      </v-data-table>
+    </v-card>
   </div>
 </template>
 <script>
@@ -41,27 +23,38 @@ export default {
   name: "FlightsComponent",
   data() {
     return {
-      flights: []
+      flights: [],
+      headers: [
+        { text: "Departure", value: "departure" },
+        { text: "Arrival", value: "arrival" },
+        { text: "Departure time", value: "startTime" },
+        { text: "Arrival time", value: "endTime" },
+        { text: "Length", value: "length" },
+        { text: "Aircraft", value: "aircraft" },
+        { text: "Fuel spent", value: "fuelSpent" },
+        { text: "", value: "actions" }
+      ]
     };
   },
   props: ["username", "all"],
   methods: {
     loadFlights() {
       let url = "flight/all/" + this.username;
-      if (this.username === undefined || this.username === 'undefined' || this.username === null || this.username == '') {
+      if (
+        this.username === undefined ||
+        this.username === "undefined" ||
+        this.username === null ||
+        this.username == ""
+      ) {
         url = "flight/all";
       }
-      axios
-        .get(Constants.API_BASE + url)
-        .then(resp => {
-          this.flights = resp.data;
-        });
+      axios.get(Constants.API_BASE + url).then(resp => {
+        this.flights = resp.data;
+      });
     },
     deleteFlight(id) {
       if (confirm("Are you sure you want to delete")) {
-      axios
-        .delete(Constants.API_BASE + "flight/" + id)
-        .then(resp => {
+        axios.delete(Constants.API_BASE + "flight/" + id).then(resp => {
           resp;
           this.loadFlights();
         });
@@ -69,7 +62,7 @@ export default {
     }
   },
   beforeMount() {
-      this.loadFlights();
+    this.loadFlights();
   }
 };
 </script>

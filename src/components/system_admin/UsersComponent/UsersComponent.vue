@@ -1,25 +1,9 @@
 <template>
   <div class="app">
-    <h2>Users</h2>
-
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Full name</th>
-            <th class="text-left">Username</th>
-            <th class="text-left">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in users" :key="index">
-            <td>{{ user.fullName }}</td>
-            <td>{{ user.userName }}</td>
-            <td>{{ user.email }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <v-card>
+      <v-card-title>Users</v-card-title>
+      <v-data-table :headers="headers" :items="users" :items-per-page="10"></v-data-table>
+    </v-card>
   </div>
 </template>
 <script>
@@ -29,7 +13,12 @@ export default {
   name: "UsersComponent",
   data() {
     return {
-      users: []
+      users: [],
+      headers: [
+        { text: "Full name", value: "fullName" },
+        { text: "Username", value: "userName" },
+        { text: "Email", value: "email" }
+      ]
     };
   },
   methods: {

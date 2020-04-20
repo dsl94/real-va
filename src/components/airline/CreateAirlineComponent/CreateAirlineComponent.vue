@@ -3,17 +3,18 @@
     <h2>Create airline</h2>
     <div class="col-sm-3">
       <v-form ref="form">
-        <v-text-field v-model="airline.airlineName" label="Airline name"></v-text-field>
+        <v-text-field outlined v-model="airline.airlineName" label="Airline name"></v-text-field>
 
-        <v-text-field class="icao-input" v-model="airline.airlineIcao" label="Airlane icao"></v-text-field>
+        <v-text-field outlined class="icao-input" v-model="airline.airlineIcao" label="Airlane icao"></v-text-field>
 
         <v-text-field
+        outlined
           class="icao-input"
           v-model="airline.airlineBaseIcao"
           label="Airline base icao"
         ></v-text-field>
 
-        <v-select :items="prices" label="Starting balance" v-model="airline.startingBalance"></v-select>
+        <v-select outlined :items="prices" label="Starting balance" v-model="airline.startingBalance"></v-select>
 
         <v-btn color="primary" @click="createAirline">Create airline</v-btn>
       </v-form>

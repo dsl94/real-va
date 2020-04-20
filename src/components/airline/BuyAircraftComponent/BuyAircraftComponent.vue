@@ -1,30 +1,27 @@
 <template>
   <div class="app">
-    <h2>Availible for buying</h2>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Icao</th>
-            <th class="text-left">Max passengers</th>
-            <th class="text-left">Price</th>
-            <th class="text-left">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(aircraft, index) in aircrafts" :key="index">
-            <td>{{ aircraft.name }}</td>
-            <td>{{ aircraft.icao }}</td>
-            <td>{{ aircraft.maxPassengers }}</td>
-            <td>$ {{ aircraft.price }}</td>
-            <td>
-              <v-icon @click.native.stop="dialog = true; aircraftBuy.icao=aircraft.icao; aircraftBuy.passengers=aircraft.maxPassengers" color="success">attach_money</v-icon>
-            </td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <v-card>
+      <v-card-title>
+        Availible for buying
+        <v-spacer></v-spacer>
+        <v-text-field
+        outlined
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table :headers="headers" :items="aircrafts" :items-per-page="10" :search="search">
+        <template v-slot:item.actions="{ item }">
+          <v-icon
+            @click.native.stop="dialog = true; aircraftBuy.icao=item.icao; aircraftBuy.passengers=item.maxPassengers"
+            color="success"
+          >attach_money</v-icon>
+        </template>
+      </v-data-table>
+    </v-card>
 
     <v-dialog v-model="dialog" max-width="600">
       <v-card>
@@ -35,13 +32,13 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field label="Type" required v-model="aircraftBuy.icao"></v-text-field>
+                <v-text-field outlined label="Type" required v-model="aircraftBuy.icao"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
+                <v-text-field outlined label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
               </v-col>
-               <v-col cols="12" sm="12">
-                <v-text-field label="Pessanger number" required v-model="aircraftBuy.passengers"></v-text-field>
+              <v-col cols="12" sm="12">
+                <v-text-field outlined label="Pessanger number" required v-model="aircraftBuy.passengers"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -65,13 +62,20 @@ export default {
   data() {
     return {
       aircraftBuy: {
-          icao: "",
-          registration: "",
-          passengers: 0
+        icao: "",
+        registration: "",
+        passengers: 0
       },
       aircrafts: [],
       dialog: false,
-      icao: ""
+      icao: "",
+      headers: [
+        { text: "Name", value: "name" },
+        { text: "ICAO", value: "icao" },
+        { text: "Max passengers", value: "maxPassengers" },
+        { text: "Actions", value: "actions", sortable: false }
+      ],
+      search: ''
     };
   },
   methods: {
@@ -84,10 +88,10 @@ export default {
         .then(resp => {
           resp;
           this.$store.dispatch("setSnackbar", {
-              showing: true,
-              text: "Aircaft bought",
-              color: "success"
-            });
+            showing: true,
+            text: "Aircaft bought",
+            color: "success"
+          });
           this.$router.push("airline-details");
         })
         .catch(err => {

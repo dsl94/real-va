@@ -3,7 +3,7 @@
     <h2>Join airline</h2>
     <div class="col-sm-3">
       <v-form ref="form">
-        <v-select item-text="name" item-value="icao" :items="airlines" label="Select airline" v-model="airline"></v-select>
+        <v-select outlined item-text="name" item-value="icao" :items="airlines" label="Select airline" v-model="airline"></v-select>
 
         <v-btn color="primary" @click="joinAirline">Join airline</v-btn>
       </v-form>
