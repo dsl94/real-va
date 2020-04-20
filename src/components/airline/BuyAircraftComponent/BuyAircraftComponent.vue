@@ -83,6 +83,11 @@ export default {
       })
         .then(resp => {
           resp;
+          this.$store.dispatch("setSnackbar", {
+              showing: true,
+              text: "Aircaft bought",
+              color: "success"
+            });
           this.$router.push("airline-details");
         })
         .catch(err => {
