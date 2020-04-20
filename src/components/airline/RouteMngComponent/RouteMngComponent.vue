@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-    <v-btn color="success" @click="dialog=true">Add route</v-btn>
+    <v-btn fixed dark fab bottom right color="success" @click="dialog=true"> 
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
     <RoutesComponent :key="componentKey" />
 
     <v-dialog v-model="dialog" max-width="600">

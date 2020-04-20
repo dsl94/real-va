@@ -37,7 +37,9 @@
         <h3>
           Fleet
           <router-link to="buy-aircraft">
-            <v-btn small depressed color="success">Buy Aircraft</v-btn>
+            <v-btn fixed dark fab bottom right color="success">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
           </router-link>
         </h3>
         <v-simple-table>
