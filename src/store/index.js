@@ -8,7 +8,14 @@ Vue.use(Vuex);
 
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex', // The key to store the state on in the storage provider.
-  storage: window.localStorage, // or window.sessionStorage or localForage
+  storage: window.localStorage, 
+  reducer: state => ({
+    status: state.status,
+    token: state.token,
+    user: state.user
+    // getRidOfThisModule: state.getRidOfThisModule (No one likes it.)
+  })
+  // or window.sessionStorage or localForage
   // Function that passes the state and returns the state with only the objects you want to store.
   // reducer: state => state,
   // Function that passes a mutation and lets you decide if it should update the state in localStorage.
@@ -21,6 +28,7 @@ export default new Vuex.Store({
     status: "",
     token: localStorage.getItem("token") || "",
     user: {},
+    snackbar: {}
   },
   mutations: {
     auth_request(state) {
@@ -40,6 +48,9 @@ export default new Vuex.Store({
     },
     airlineJoined(state, airline) {
       state.user.airlineIcao = airline
+    },
+    SET_SNACKBAR(state, snackbar) {
+      state.snackbar = snackbar;
     }
   },
   actions: {
@@ -106,6 +117,9 @@ export default new Vuex.Store({
     },
     joinedAirline({ commit }, airline) {
       commit("airlineJoined", airline);
+    },
+    setSnackbar({commit}, snackbar) {
+      commit("SET_SNACKBAR", snackbar);
     }
   },
   getters: {

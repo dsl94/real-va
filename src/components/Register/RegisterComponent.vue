@@ -36,6 +36,7 @@
           </v-row>
         </v-container>
       </v-content>
+      
     </v-app>
   </v-flex>
 </template>
@@ -63,7 +64,7 @@ export default {
       this.$store
         .dispatch("register", data)
         .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+        .catch(err => this.$store.dispatch("setSnackbar", {showing: true, text: err.response.data.message, color: "error"}));
     }
   }
 };

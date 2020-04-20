@@ -62,7 +62,11 @@ export default {
       this.$store
         .dispatch("login", { username, password })
         .then(() => this.redirect())
-        .catch(err => console.log(err));
+        .catch(err => this.sendError(err));
+    },
+    sendError(err) {
+      err;
+      this.$store.dispatch("setSnackbar", {showing: true, text: "Bad credentials", color: "error"})
     }
   }
 };
