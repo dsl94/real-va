@@ -108,6 +108,20 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
+           <router-link
+            class="link"
+            to="bookings"
+            v-if="$store.getters.getRoles.every(elem => ['ROLE_USER','ROLE_ADMIN'].indexOf(elem) > -1)"
+          >
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>airplanemode_active</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Bookings</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
         </v-list>
       </v-navigation-drawer>
 

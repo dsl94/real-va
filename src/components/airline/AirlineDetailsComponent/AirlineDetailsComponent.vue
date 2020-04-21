@@ -23,7 +23,7 @@
       </v-col>
       <v-col cols="12" sm="7">
         <v-card>
-          <v-card-title>Pilots</v-card-title>
+          <v-card-title>Airplanes</v-card-title>
           <v-data-table :headers="headersPlanes" :items="airline.aircrafts" :items-per-page="10"></v-data-table>
         </v-card>
         <router-link to="buy-aircraft">
