@@ -30,6 +30,7 @@ export default {
   methods: {
     flightBooked() {
         this.componentKey += 1;
+        this.$store.dispatch("setCanBook",1)
         this.$router.push("profile");
     }
   }

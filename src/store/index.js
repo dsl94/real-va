@@ -51,6 +51,9 @@ export default new Vuex.Store({
     },
     SET_SNACKBAR(state, snackbar) {
       state.snackbar = snackbar;
+    },
+    SET_CAN_BOOK(state, num) {
+      state.user.numberOfBookings = num;
     }
   },
   actions: {
@@ -65,12 +68,14 @@ export default new Vuex.Store({
               username: resp.data.username,
               roles: resp.data.roles,
               airlineName: resp.data.airlineName,
-              airlineIcao: resp.data.airlineIcao
+              airlineIcao: resp.data.airlineIcao,
+              numberOfBookings: resp.data.numberOfBookings
             };
             localStorage.setItem("username", user.username);
             localStorage.setItem("roles", user.roles);
             localStorage.setItem("airlineName", user.airlineName);
             localStorage.setItem("airlineIcao", user.airlineIcao);
+            localStorage.setItem("numberOfBookings", user.numberOfBookings);
             axios.defaults.headers.common["Authorization"] = token;
             commit("auth_success", { token, user });
             resolve(resp);
@@ -109,6 +114,7 @@ export default new Vuex.Store({
         localStorage.removeItem("roles");
         localStorage.removeItem("airlineName");
         localStorage.removeItem("airlineIcao");
+        localStorage.removeItem("numberOfBookings");
         window.localStorage.clear();
         localStorage.clear();
         delete axios.defaults.headers.common["Authorization"];
@@ -120,6 +126,9 @@ export default new Vuex.Store({
     },
     setSnackbar({commit}, snackbar) {
       commit("SET_SNACKBAR", snackbar);
+    },
+    setCanBook({commit}, num) {
+      commit("SET_CAN_BOOK", num);
     }
   },
   getters: {
@@ -137,5 +146,8 @@ export default new Vuex.Store({
     getAirlineIcao: (state) => {
       return state.user.airlineIcao;
     },
+    canBook: (state) => {
+      return state.user.numberOfBookings < 1 && state.user.airlineIcao != null
+    }
   },
 });

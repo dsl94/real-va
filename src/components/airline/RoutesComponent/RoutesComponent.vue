@@ -15,7 +15,7 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table :headers="headers" :items="routes" :items-per-page="10" :search="search">
-        <template v-slot:item.book="{ item }" v-if="booking">
+        <template v-slot:item.book="{ item }" v-if="booking && $store.getters.canBook">
           <v-icon
             @click.native.stop="dialog = true; bookingReq.routeId=item.id;"
             color="success"
