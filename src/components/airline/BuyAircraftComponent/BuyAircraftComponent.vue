@@ -6,6 +6,7 @@
         <v-spacer></v-spacer>
         <v-text-field
         outlined
+        rounded
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"
@@ -32,21 +33,21 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field outlined label="Type" required v-model="aircraftBuy.icao"></v-text-field>
+                <v-text-field outlined rounded label="Type" required v-model="aircraftBuy.icao"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field outlined label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
+                <v-text-field outlined rounded label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
               </v-col>
               <v-col cols="12" sm="12">
-                <v-text-field outlined label="Pessanger number" required v-model="aircraftBuy.passengers"></v-text-field>
+                <v-text-field outlined rounded label="Pessanger number" required v-model="aircraftBuy.passengers"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="buyAircraft">Buy</v-btn>
+          <v-btn color="darken-1" rounded outlined @click="dialog = false">Close</v-btn>
+          <v-btn color="success darken-1" rounded outlined @click="buyAircraft">Buy</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

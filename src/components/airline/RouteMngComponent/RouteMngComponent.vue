@@ -14,20 +14,21 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field outlined label="Departure" required v-model="route.departure"></v-text-field>
+                <v-text-field outlined rounded label="Departure" required v-model="route.departure"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field outlined label="Arrival" required v-model="route.arrival"></v-text-field>
+                <v-text-field outlined rounded label="Arrival" required v-model="route.arrival"></v-text-field>
               </v-col>
               <v-col cols="12" sm="4">
-                <v-text-field outlined label="Flight number" required v-model="route.flightNumber"></v-text-field>
+                <v-text-field outlined rounded label="Flight number" required v-model="route.flightNumber"></v-text-field>
               </v-col>
               <v-col cols="12" sm="3">
-                <v-checkbox v-model="route.returnFlight" label="Rreturn?"></v-checkbox>
+                <v-switch v-model="route.returnFlight" label="Rreturn?"></v-switch>
               </v-col>
               <v-col cols="12" sm="5" v-if="route.returnFlight">
                 <v-text-field
                   outlined
+                  rounded
                   label="Return flight number"
                   required
                   v-model="route.returnFlightNumber"
@@ -38,8 +39,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="createRoute">Add route</v-btn>
+          <v-btn color="darken-1" rounded outlined @click="dialog = false">Close</v-btn>
+          <v-btn color="success darken-1" rounded outlined @click="createRoute">Add route</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

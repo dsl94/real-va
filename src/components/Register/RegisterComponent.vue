@@ -12,14 +12,15 @@
                     <v-spacer />
                   </v-toolbar>
                   <v-card-text>
-                    <v-text-field outlined label="Username" name="login" type="text" v-model="username" />
+                    <v-text-field outlined rounded label="Username" name="login" type="text" v-model="username" />
 
-                    <v-text-field outlined label="Email" name="email" type="text" v-model="email" />
+                    <v-text-field outlined rounded label="Email" name="email" type="text" v-model="email" />
 
-                    <v-text-field outlined label="Full name" name="fullName" type="text" v-model="fullName" />
+                    <v-text-field outlined rounded label="Full name" name="fullName" type="text" v-model="fullName" />
 
                     <v-text-field
                     outlined
+                    rounded
                       id="password"
                       label="Password"
                       name="password"
@@ -29,7 +30,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer />
-                    <v-btn type="submit" color="primary">Register</v-btn>
+                    <v-btn type="submit" rounded block  large color="primary">Register</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-form>

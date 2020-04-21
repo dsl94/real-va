@@ -6,6 +6,7 @@
         <v-spacer></v-spacer>
         <v-text-field
           outlined
+          rounded
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"

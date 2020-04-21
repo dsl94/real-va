@@ -1,12 +1,27 @@
 <template>
   <div class="app">
-    <h2>Join airline</h2>
     <div class="col-sm-3">
-      <v-form ref="form">
-        <v-select outlined item-text="name" item-value="icao" :items="airlines" label="Select airline" v-model="airline"></v-select>
+      <v-card>
+        <v-card-title>
+          Join airline
+          <v-spacer></v-spacer>
+        </v-card-title>
+        <v-card-text>
+          <v-form ref="form">
+            <v-select
+              outlined
+              rounded=""
+              item-text="name"
+              item-value="icao"
+              :items="airlines"
+              label="Select airline"
+              v-model="airline"
+            ></v-select>
 
-        <v-btn color="primary" @click="joinAirline">Join airline</v-btn>
-      </v-form>
+            <v-btn rounded block color="primary" @click="joinAirline">Join airline</v-btn>
+          </v-form>
+        </v-card-text>
+      </v-card>
     </div>
   </div>
 </template>
@@ -32,7 +47,7 @@ export default {
       })
         .then(resp => {
           resp;
-          this.$store.dispatch("joinedAirline", this.airline)
+          this.$store.dispatch("joinedAirline", this.airline);
           this.$router.push("profile");
         })
         .catch(err => {

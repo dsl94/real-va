@@ -4,15 +4,15 @@
       <v-card-title>Pilot profile</v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-text-field outlined v-model="user.fullName" label="Full name" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="user.fullName" label="Full name" readonly></v-text-field>
 
-          <v-text-field outlined v-model="user.email" label="E-mail" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="user.email" label="E-mail" readonly></v-text-field>
 
-          <v-text-field outlined v-model="user.userName" label="Username" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="user.userName" label="Username" readonly></v-text-field>
 
-          <v-text-field outlined v-model="user.secretCode" label="Secret code" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="user.secretCode" label="Secret code" readonly></v-text-field>
 
-          <v-text-field outlined v-model="user.airline" label="Airline" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="user.airline" label="Airline" readonly></v-text-field>
         </v-form>
       </v-card-text>
     </v-card>

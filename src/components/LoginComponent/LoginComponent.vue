@@ -12,10 +12,11 @@
                     <v-spacer />
                   </v-toolbar>
                   <v-card-text>
-                    <v-text-field outlined label="Login" name="login" type="text" v-model="username" />
+                    <v-text-field outlined rounded label="Login" name="login" type="text" v-model="username" />
 
                     <v-text-field
                     outlined
+                    rounded
                       id="password"
                       label="Password"
                       name="password"
@@ -24,8 +25,8 @@
                     />
                   </v-card-text>
                   <v-card-actions>
-                    <v-spacer />
-                    <v-btn type="submit" color="primary">Login</v-btn>
+                    <!-- <v-spacer /> -->
+                    <v-btn type="submit" rounded block  large color="primary">Login</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-form>

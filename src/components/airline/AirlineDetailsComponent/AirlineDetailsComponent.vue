@@ -4,13 +4,13 @@
       <v-card-title>Airline details</v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-text-field outlined v-model="airline.name" label="Airline name" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="airline.name" label="Airline name" readonly></v-text-field>
 
-          <v-text-field outlined v-model="airline.icao" label="Airline icao" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="airline.icao" label="Airline icao" readonly></v-text-field>
 
-          <v-text-field outlined v-model="airline.base" label="Airline base" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="airline.base" label="Airline base" readonly></v-text-field>
 
-          <v-text-field outlined v-model="airline.balance" label="Current balance in $" readonly></v-text-field>
+          <v-text-field outlined rounded v-model="airline.balance" label="Current balance in $" readonly></v-text-field>
         </v-form>
       </v-card-text>
     </v-card>
