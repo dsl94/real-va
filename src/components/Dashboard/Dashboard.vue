@@ -111,7 +111,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app color="white">
+      <v-app-bar app color="primary" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Real VA</v-toolbar-title>
 
