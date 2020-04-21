@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <v-navigation-drawer v-model="drawer" app>
-        <v-list dense>
+      <v-navigation-drawer
+       v-model="drawer" app
+       color="primary"
+        dark
+       >
+        <v-list  nav
+          class="py-0" >
           <div class="metar">
             <v-text-field
               label="ICAO"
@@ -106,7 +111,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app color="indigo" dark>
+      <v-app-bar app color="white">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Real VA</v-toolbar-title>
 
@@ -118,9 +123,9 @@
 
       <router-view></router-view>
 
-      <v-footer color="indigo" app>
+      <!-- <v-footer color="white" app>
         <span class="white--text">&copy; 2020</span>
-      </v-footer>
+      </v-footer> -->
     </v-app>
   </div>
 </template>
