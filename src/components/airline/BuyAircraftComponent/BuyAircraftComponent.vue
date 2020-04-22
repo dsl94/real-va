@@ -74,6 +74,7 @@ export default {
         { text: "Name", value: "name" },
         { text: "ICAO", value: "icao" },
         { text: "Max passengers", value: "maxPassengers" },
+        { text: "Price $", value: "price" },
         { text: "Actions", value: "actions", sortable: false }
       ],
       search: ''

@@ -15,6 +15,8 @@
               <v-text-field outlined rounded v-model="user.secretCode" label="Secret code" readonly></v-text-field>
 
               <v-text-field outlined rounded v-model="user.airline" label="Airline" readonly></v-text-field>
+
+              <v-text-field outlined rounded v-model="user.location" label="Location" readonly></v-text-field>
             </v-form>
           </v-card-text>
         </v-card>
@@ -23,7 +25,7 @@
         <v-card>
           <v-card-title>Pilot booking</v-card-title>
           <v-card-text>
-            <v-row>
+            <v-row v-if="!$store.getters.canBook">
               <v-col cols="12" md="6">
                 <v-text-field
                   outlined
@@ -70,6 +72,11 @@
                 <v-btn rounded block color="warning" @click="cancelBooking">Cancel booking</v-btn>
               </v-col>
             </v-row>
+            <v-row v-else>
+              <v-col cols="12" md="4"></v-col>
+              <v-col cols="12" md="4">No booked flight, go to booking and book</v-col>
+              <v-col cols="12" md="4"></v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </v-col>
@@ -93,7 +100,8 @@ export default {
         email: "",
         userName: "",
         secretCode: "",
-        airline: ""
+        airline: "",
+        location: ""
       },
       booking: {
         departure: "",

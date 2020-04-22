@@ -38,6 +38,20 @@
           </router-link>
           <router-link
             class="link"
+            to="fleet"
+            v-if="$store.getters.getRoles == 'ROLE_USER' && $store.getters.getAirlineIcao != null"
+          >
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>airplanemode_active</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Fleet</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
+          <router-link
+            class="link"
             to="users"
             v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
           >
