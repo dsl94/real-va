@@ -32,6 +32,9 @@ export default {
         { text: "Length", value: "length" },
         { text: "Aircraft", value: "aircraft" },
         { text: "Fuel spent", value: "fuelSpent" },
+        { text: "Fuel cost $", value: "fuelCost" },
+        { text: "Earning $", value: "earning" },
+        { text: "Profit $", value: "profit" },
         { text: "", value: "actions" }
       ]
     };
