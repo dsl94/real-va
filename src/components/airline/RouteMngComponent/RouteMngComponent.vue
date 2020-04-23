@@ -14,19 +14,20 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field outlined rounded label="Departure" required v-model="route.departure"></v-text-field>
+                <v-text-field class="icao-input" outlined rounded label="Departure" required v-model="route.departure"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field outlined rounded label="Arrival" required v-model="route.arrival"></v-text-field>
+                <v-text-field class="icao-input" outlined rounded label="Arrival" required v-model="route.arrival"></v-text-field>
               </v-col>
               <v-col cols="12" sm="4">
-                <v-text-field outlined rounded label="Flight number" required v-model="route.flightNumber"></v-text-field>
+                <v-text-field class="icao-input" outlined rounded label="Flight number" required v-model="route.flightNumber"></v-text-field>
               </v-col>
               <v-col cols="12" sm="3">
                 <v-switch v-model="route.returnFlight" label="Rreturn?"></v-switch>
               </v-col>
               <v-col cols="12" sm="5" v-if="route.returnFlight">
                 <v-text-field
+                class="icao-input"
                   outlined
                   rounded
                   label="Return flight number"
@@ -111,5 +112,8 @@ export default {
 <style>
 .app {
   padding: 2rem;
+}
+.icao-input input {
+  text-transform: uppercase;
 }
 </style>

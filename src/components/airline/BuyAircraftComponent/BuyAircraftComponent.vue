@@ -36,7 +36,7 @@
                 <v-text-field outlined rounded label="Type" required v-model="aircraftBuy.icao"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field outlined rounded label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
+                <v-text-field class="icao-input" outlined rounded label="Registration" required v-model="aircraftBuy.registration"></v-text-field>
               </v-col>
               <v-col cols="12" sm="12">
                 <v-text-field outlined rounded label="Pessanger number" required v-model="aircraftBuy.passengers"></v-text-field>

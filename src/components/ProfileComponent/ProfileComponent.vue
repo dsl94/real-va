@@ -1,27 +1,49 @@
 <template>
   <div class="app">
     <v-row>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="12">
         <v-card>
           <v-card-title>Pilot profile</v-card-title>
           <v-card-text>
             <v-form ref="form">
-              <v-text-field outlined rounded v-model="user.fullName" label="Full name" readonly></v-text-field>
+              <v-row>
+                <v-col colls="12" md="4">
+                  <v-text-field outlined rounded v-model="user.fullName" label="Full name" readonly></v-text-field>
+                </v-col>
 
-              <v-text-field outlined rounded v-model="user.email" label="E-mail" readonly></v-text-field>
+                <v-col colls="12" md="4">
+                  <v-text-field outlined rounded v-model="user.email" label="E-mail" readonly></v-text-field>
+                </v-col>
 
-              <v-text-field outlined rounded v-model="user.userName" label="Username" readonly></v-text-field>
+                <v-col colls="12" md="4">
+                  <v-text-field outlined rounded v-model="user.userName" label="Username" readonly></v-text-field>
+                </v-col>
 
-              <v-text-field outlined rounded v-model="user.secretCode" label="Secret code" readonly></v-text-field>
+                <v-col colls="12" md="4">
+                  <v-text-field
+                    outlined
+                    rounded
+                    v-model="user.secretCode"
+                    label="Secret code"
+                    readonly
+                  ></v-text-field>
+                </v-col>
 
-              <v-text-field outlined rounded v-model="user.airline" label="Airline" readonly></v-text-field>
+                <v-col colls="12" md="4">
+                  <v-text-field outlined rounded v-model="user.airline" label="Airline" readonly></v-text-field>
+                </v-col>
 
-              <v-text-field outlined rounded v-model="user.location" label="Location" readonly></v-text-field>
+                <v-col colls="12" md="4">
+                  <v-text-field outlined rounded v-model="user.location" label="Location" readonly></v-text-field>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="8">
+    </v-row>
+    <v-row>
+      <v-col cols="12" md="12">
         <v-card>
           <v-card-title>Pilot booking</v-card-title>
           <v-card-text>
@@ -124,11 +146,13 @@ export default {
       });
     },
     cancelBooking() {
-      axios.delete(Constants.API_BASE + "booking/user/booking/cancel").then(resp => {
-        resp;
-        this.$store.dispatch("setCanBook",0)
-        this.load();
-      });
+      axios
+        .delete(Constants.API_BASE + "booking/user/booking/cancel")
+        .then(resp => {
+          resp;
+          this.$store.dispatch("setCanBook", 0);
+          this.load();
+        });
     }
   },
   beforeMount() {
