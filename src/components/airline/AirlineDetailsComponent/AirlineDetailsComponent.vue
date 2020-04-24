@@ -10,7 +10,13 @@
 
           <v-text-field outlined rounded v-model="airline.base" label="Airline base" readonly></v-text-field>
 
-          <v-text-field outlined rounded v-model="airline.balance" label="Current balance in $" readonly></v-text-field>
+          <v-text-field
+            outlined
+            rounded
+            v-model="airline.balance"
+            label="Current balance in $"
+            readonly
+          ></v-text-field>
         </v-form>
       </v-card-text>
     </v-card>
@@ -24,7 +30,7 @@
       <v-col cols="12" sm="7">
         <v-card>
           <v-card-title>Airplanes</v-card-title>
-          <v-data-table :headers="headersPlanes" :items="airline.aircrafts" :items-per-page="10"></v-data-table>
+          <v-data-table :headers="headersPlanes" :items="airline.aircrafts" :items-per-page="10" @click:row="handleRowClick"></v-data-table>
         </v-card>
         <router-link to="buy-aircraft">
           <v-btn fixed dark fab bottom right color="success">
@@ -33,6 +39,34 @@
         </router-link>
       </v-col>
     </v-row>
+
+    <v-dialog v-model="dialog" max-width="400">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Change location</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="12">
+                <v-text-field
+                    outlined
+                    rounded
+                    v-model="location.icao"
+                    label="Location"
+                     class="icao-input"
+                  ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="darken-1" rounded outlined @click="dialog = false">Close</v-btn>
+          <v-btn color="success darken-1" rounded outlined @click="changeLocation">Change location</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -63,7 +97,12 @@ export default {
         { text: "Location", value: "location" },
         { text: "Registration", value: "registration" },
         { text: "Capacity", value: "capacity" }
-      ]
+      ],
+      location: {
+        id: 0,
+        icao: ""
+      },
+      dialog: false
     };
   },
   methods: {
@@ -71,6 +110,37 @@ export default {
       axios.get(Constants.API_BASE + "airline/admin/details").then(resp => {
         this.airline = resp.data;
       });
+    },
+    changeLocation() {
+      axios
+        .put(
+          Constants.API_BASE +
+            "airline/admin/details/plane/" +
+            this.location.id +
+            "/" +
+            this.location.icao
+        )
+        .then(resp => {
+          resp;
+          this.load();
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: "Location changed",
+            color: "success"
+          });
+          this.dialog=false;
+        })
+        .catch(err =>
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: err.response.data.message,
+            color: "error"
+          })
+        );
+    },
+    handleRowClick(value) {
+      this.location.id = value.id;
+      this.dialog=true;
     }
   },
   beforeMount() {

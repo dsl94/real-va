@@ -34,7 +34,14 @@
                 </v-col>
 
                 <v-col colls="12" md="4">
-                  <v-text-field outlined rounded v-model="user.location" label="Location" readonly></v-text-field>
+                  <v-text-field
+                    outlined
+                    rounded
+                    v-model="user.location"
+                    label="Location, to change it enter new icao code and press Enter"
+                     @keyup.enter.native="changeLocation"
+                     class="icao-input"
+                  ></v-text-field>
                 </v-col>
               </v-row>
             </v-form>
@@ -138,11 +145,14 @@ export default {
   },
   methods: {
     load() {
-      axios.get(Constants.API_BASE + "user/profile").then(resp => {
-        this.user = resp.data;
-      });
+      this.loadProfile();
       axios.get(Constants.API_BASE + "booking/user/all").then(resp => {
         this.booking = resp.data;
+      });
+    },
+    loadProfile() {
+      axios.get(Constants.API_BASE + "user/profile").then(resp => {
+        this.user = resp.data;
       });
     },
     cancelBooking() {
@@ -153,6 +163,26 @@ export default {
           this.$store.dispatch("setCanBook", 0);
           this.load();
         });
+    },
+    changeLocation() {
+      axios
+        .put(Constants.API_BASE + "user/profile/" + this.user.location)
+        .then(resp => {
+          resp;
+          this.loadProfile();
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: "Location changed",
+            color: "success"
+          });
+        })
+        .catch(err =>
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: err.response.data.message,
+            color: "error"
+          })
+        );
     }
   },
   beforeMount() {
@@ -168,5 +198,8 @@ export default {
 <style>
 .app {
   padding: 2rem;
+}
+.icao-input input {
+  text-transform: uppercase;
 }
 </style>
