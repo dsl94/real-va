@@ -17,7 +17,7 @@
       <v-data-table :headers="headers" :items="aircrafts" :items-per-page="10" :search="search">
         <template v-slot:item.actions="{ item }">
           <v-icon
-            @click.native.stop="dialog = true; aircraftBuy.icao=item.icao; aircraftBuy.passengers=item.maxPassengers"
+            @click.native.stop="dialog = true; aircraftBuy.icao=item.icao; aircraftBuy.passengers=item.maxPassengers; aircraftBuy.cargo=item.cargo"
             color="success"
           >attach_money</v-icon>
         </template>
@@ -65,7 +65,8 @@ export default {
       aircraftBuy: {
         icao: "",
         registration: "",
-        passengers: 0
+        passengers: 0,
+        cargo: false
       },
       aircrafts: [],
       dialog: false,
@@ -75,6 +76,7 @@ export default {
         { text: "ICAO", value: "icao" },
         { text: "Max passengers", value: "maxPassengers" },
         { text: "Price $", value: "price" },
+        { text: "Cargo", value: "cargo" },
         { text: "Actions", value: "actions", sortable: false }
       ],
       search: ''
