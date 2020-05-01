@@ -100,6 +100,15 @@ const routes = [{
       }
     }, 
     {
+      path: 'admin-aircrafts',
+      name: 'AdminAircrafts',
+      component: () => import('../views/Admin/Aircrafts'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_SYSTEM_ADMIN"
+      }
+    }, 
+    {
       path: 'flights',
       name: 'Flights',
       component: () => import('../views/Admin/Flights'),

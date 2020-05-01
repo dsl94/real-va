@@ -66,6 +66,20 @@
           </router-link>
           <router-link
             class="link"
+            to="admin-aircrafts"
+            v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
+          >
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>airplanemode_active</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Aircrafts</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
+          <router-link
+            class="link"
             to="flights"
             v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
           >
@@ -81,7 +95,7 @@
           <router-link
             class="link"
             to="create-airline"
-            v-if="$store.getters.getAirlineIcao == null"
+            v-if="$store.getters.getAirlineIcao == null && !$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
           >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
@@ -92,7 +106,7 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
-          <router-link class="link" to="join-airline" v-if="$store.getters.getAirlineIcao == null">
+          <router-link class="link" to="join-airline" v-if="$store.getters.getAirlineIcao == null && !$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
                 <v-icon>airplanemode_active</v-icon>
