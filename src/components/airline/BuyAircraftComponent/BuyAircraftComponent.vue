@@ -17,7 +17,7 @@
       <v-data-table :headers="headers" :items="aircrafts" :items-per-page="10" :search="search">
         <template v-slot:item.actions="{ item }">
           <v-icon
-            @click.native.stop="dialog = true; aircraftBuy.icao=item.icao; aircraftBuy.passengers=item.maxPassengers; aircraftBuy.cargo=item.cargo"
+            @click.native.stop="dialog = true; handleBuyClick(item)"
             color="success"
           >attach_money</v-icon>
         </template>
@@ -106,6 +106,12 @@ export default {
       axios.get(Constants.API_BASE + "aircraft/for-buying").then(resp => {
         this.aircrafts = resp.data;
       });
+    },
+    handleBuyClick(item) {
+        this.aircraftBuy.icao=item.icao;
+        this.aircraftBuy.passengers=item.maxPassengers;
+        this.aircraftBuy.cargo=item.cargo;
+        console.log(item.cargo)
     }
   },
   beforeMount() {
