@@ -85,7 +85,7 @@
           >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>airplanemode_active</v-icon>
+                <v-icon>flight_takeoff</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>All flights</v-list-item-title>
@@ -99,7 +99,7 @@
           >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>airplanemode_active</v-icon>
+                <v-icon>create</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Create airline</v-list-item-title>
@@ -129,7 +129,7 @@
                      <router-link class="link" to="routes" v-if="$store.getters.getRoles == 'ROLE_ADMIN'">
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>airplanemode_active</v-icon>
+                <v-icon>language</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Routes</v-list-item-title>
@@ -143,7 +143,7 @@
           >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>
-                <v-icon>airplanemode_active</v-icon>
+                <v-icon>flight_takeoff</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Bookings</v-list-item-title>
