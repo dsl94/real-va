@@ -22,10 +22,18 @@
     </v-card>
     <v-row>
       <v-col cols="12" sm="5">
-        <v-card>
-          <v-card-title>Pilots</v-card-title>
-          <v-data-table :headers="headersPilots" :items="airline.pilots" :items-per-page="10"></v-data-table>
-        </v-card>
+        <v-row>
+          <v-card>
+            <v-card-title>Pilots</v-card-title>
+            <v-data-table :headers="headersPilots" :items="airline.pilots" :items-per-page="10"></v-data-table>
+          </v-card>
+        </v-row>
+        <v-row>
+          <v-card>
+            <v-card-title>Bookings</v-card-title>
+            <v-data-table :headers="headersBookings" :items="airline.bookings" :items-per-page="10"></v-data-table>
+          </v-card>
+        </v-row>
       </v-col>
       <v-col cols="12" sm="7">
         <v-card>
@@ -84,12 +92,19 @@ export default {
         base: "",
         balance: 0,
         aircrafts: [],
-        pilots: []
+        pilots: [],
+        bookings: []
       },
       headersPilots: [
         { text: "Full name", value: "fullName" },
         { text: "Username", value: "userName" },
         { text: "Email", value: "email" }
+      ],
+       headersBookings: [
+        { text: "Pilot", value: "user" },
+        { text: "Departure", value: "departure" },
+        { text: "Arrival", value: "arrival" },
+        { text: "Aircraft", value: "aircraft" }
       ],
       headersPlanes: [
         { text: "Name", value: "name" },
