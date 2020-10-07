@@ -27,11 +27,11 @@
             <v-card-title>Pilots</v-card-title>
             <v-data-table :headers="headersPilots" :items="airline.pilots" :items-per-page="10"></v-data-table>
           </v-card>
-        </v-row>
+        </v-row> <br>
         <v-row>
           <v-card>
             <v-card-title>Bookings</v-card-title>
-            <v-data-table :headers="headersBookings" :items="airline.bookings" :items-per-page="10"></v-data-table>
+            <v-data-table :headers="headersBookings" :items="airline.bookings" :items-per-page="10" @click:row="handleRowClickBookings"></v-data-table>
           </v-card>
         </v-row>
       </v-col>
@@ -72,6 +72,18 @@
           <v-spacer></v-spacer>
           <v-btn color="darken-1" rounded outlined @click="dialog = false">Close</v-btn>
           <v-btn color="success darken-1" rounded outlined @click="changeLocation">Change location</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="dialogConfirm" max-width="400">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Cancel booking</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="darken-1" rounded outlined @click="dialogConfirm = false">Close</v-btn>
+          <v-btn color="warning darken-1" rounded outlined @click="cancelBooking">Cancel booking</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -117,7 +129,9 @@ export default {
         id: 0,
         icao: ""
       },
-      dialog: false
+      dialog: false,
+      dialogConfirm: false,
+      username: ""
     };
   },
   methods: {
@@ -153,9 +167,40 @@ export default {
           })
         );
     },
+    cancelBooking() {
+      axios
+        .delete(
+          Constants.API_BASE +
+            "booking/user/booking/cancel/" +
+            this.username
+        )
+        .then(resp => {
+          resp;
+          this.load();
+          this.dialogConfirm = false;
+          this.username = "";
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: "Booking canceled",
+            color: "warning"
+          });
+          this.dialog=false;
+        })
+        .catch(err =>
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: err.response.data.message,
+            color: "error"
+          })
+        );
+    },
     handleRowClick(value) {
       this.location.id = value.id;
       this.dialog=true;
+    },
+    handleRowClickBookings(value) {
+      this.username = value.user;
+      this.dialogConfirm = true;
     }
   },
   beforeMount() {
