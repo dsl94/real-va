@@ -7,7 +7,7 @@
             <v-col cols="12" sm="8" md="4">
               <v-form @submit.prevent="register">
                 <v-card class="elevation-12">
-                  <v-toolbar color="primary" dark flat>
+                  <v-toolbar color="info" dark flat>
                     <v-toolbar-title>Register</v-toolbar-title>
                     <v-spacer />
                   </v-toolbar>
@@ -30,7 +30,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer />
-                    <v-btn type="submit" rounded block  large color="primary">Register</v-btn>
+                    <v-btn type="submit" rounded block  large color="success">Register</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-form>

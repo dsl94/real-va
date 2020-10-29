@@ -7,7 +7,7 @@
             <v-col cols="12" sm="8" md="4">
               <v-form @submit.prevent="login" class="login">
                 <v-card class="elevation-12">
-                  <v-toolbar color="primary" dark flat>
+                  <v-toolbar color="info" dark flat>
                     <v-toolbar-title>Login</v-toolbar-title>
                     <v-spacer />
                   </v-toolbar>
@@ -26,7 +26,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <!-- <v-spacer /> -->
-                    <v-btn type="submit" rounded block  large color="primary">Login</v-btn>
+                    <v-btn type="submit" rounded block  large color="success">Login</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-form>

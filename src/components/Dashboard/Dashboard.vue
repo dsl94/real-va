@@ -3,8 +3,8 @@
     <v-app id="inspire">
       <v-navigation-drawer
        v-model="drawer" app
-       color="primary"
-        dark
+       color="info" dark
+        
        >
         <v-list  nav
           class="py-0" >
@@ -17,7 +17,7 @@
               @keyup.enter.native="getMetar"
             >
               <template v-slot:append>
-                <v-btn tile color="primary" class="ma-0" @click="getMetar">Get metar</v-btn>
+                <v-btn  tile color="success" class="ma-0" @click="getMetar">Get metar</v-btn>
               </template>
             </v-text-field>
             <span class="font-weight-bold caption">{{this.metar.raw}}</span>
@@ -153,7 +153,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app color="primary" dark>
+      <v-app-bar app color="info" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Real VA</v-toolbar-title>
 
