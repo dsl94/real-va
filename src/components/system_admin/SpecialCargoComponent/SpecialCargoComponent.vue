@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <v-btn fixed dark fab bottom right color="success" @click="dialog = true">
+    <v-btn v-if="$store.getters.getAirlineIcao == null && !($store.getters.getRoles == 'ROLE_SYSTEM_ADMIN')" fixed dark fab bottom right color="success" @click="dialog = true">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     <v-card>
