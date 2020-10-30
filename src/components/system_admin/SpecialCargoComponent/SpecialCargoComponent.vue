@@ -170,7 +170,7 @@ export default {
       headers: [
         { text: "Departure", value: "departure" },
         { text: "Arrival", value: "arrival" },
-        { text: "Weight", value: "weight" },
+        { text: "Weight (kg)", value: "weight" },
         { text: "Description", value: "description" },
         { text: "Multiplication", value: "multiplication" },
       ],
@@ -234,7 +234,32 @@ export default {
           })
         );
     },
-    createAutomatic() {},
+    createAutomatic() {
+        let url = "admin/spc/automatic/"+this.packetNum;
+      axios({
+        url: Constants.API_BASE + url,
+        method: "POST",
+      })
+        .then((resp) => {
+          resp;
+          this.componentKey += 1;
+          this.dialog = false;
+          this.loadSpc();
+          this.packetNum = 0;
+            this.$store.dispatch("setSnackbar", {
+              showing: true,
+              text: "Special cargo created",
+              color: "success",
+            });
+        })
+        .catch((err) =>
+          this.$store.dispatch("setSnackbar", {
+            showing: true,
+            text: err.response.data.message,
+            color: "error",
+          })
+        );
+    },
   },
   beforeMount() {
     this.loadSpc();
