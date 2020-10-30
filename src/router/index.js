@@ -118,6 +118,15 @@ const routes = [{
       }
     }, 
     {
+      path: 'admin-special-cargo',
+      name: 'SpecialCargo',
+      component: () => import('../views/Admin/SpecialCargo'),
+      meta: {
+        requiresAuth: true,
+        role: "ROLE_SYSTEM_ADMIN"
+      }
+    }, 
+    {
       path: 'about',
       name: 'About',
       component: () => import('../views/About')

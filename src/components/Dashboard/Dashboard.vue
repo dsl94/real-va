@@ -150,6 +150,21 @@
               </v-list-item-content>
             </v-list-item>
           </router-link>
+
+           <router-link
+            class="link"
+            to="admin-special-cargo"
+            v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
+          >
+            <v-list-item class="dashboardBtn">
+              <v-list-item-action>
+                <v-icon>archive</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Special Cargo</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </router-link>
         </v-list>
       </v-navigation-drawer>
 
