@@ -154,7 +154,7 @@
            <router-link
             class="link"
             to="admin-special-cargo"
-            v-if="$store.getters.getRoles == 'ROLE_SYSTEM_ADMIN'"
+            v-if="$store.getters.getRoles.every(elem => ['ROLE_USER','ROLE_ADMIN', 'ROLE_SYSTEM_ADMIN'].indexOf(elem) > -1)"
           >
             <v-list-item class="dashboardBtn">
               <v-list-item-action>

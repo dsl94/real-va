@@ -98,6 +98,15 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="12">
+                <v-text-field
+                  outlined
+                  rounded
+                  v-model="booking.specialCargo"
+                  label="Special cargo"
+                  readonly
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="12">
                 <v-btn rounded block color="warning" @click="cancelBooking">Cancel booking</v-btn>
               </v-col>
             </v-row>
@@ -139,7 +148,8 @@ export default {
         passengers: 0,
         cargo: 0,
         user: "",
-        aircraft: ""
+        aircraft: "",
+        specialCargo: ""
       }
     };
   },

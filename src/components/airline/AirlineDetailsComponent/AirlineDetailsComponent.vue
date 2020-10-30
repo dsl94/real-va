@@ -116,7 +116,8 @@ export default {
         { text: "Pilot", value: "user" },
         { text: "Departure", value: "departure" },
         { text: "Arrival", value: "arrival" },
-        { text: "Aircraft", value: "aircraft" }
+        { text: "Aircraft", value: "aircraft" },
+        { text: "Special cargo", value: "specialCargo" }
       ],
       headersPlanes: [
         { text: "Name", value: "name" },

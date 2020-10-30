@@ -123,7 +123,7 @@ const routes = [{
       component: () => import('../views/Admin/SpecialCargo'),
       meta: {
         requiresAuth: true,
-        role: "ROLE_SYSTEM_ADMIN"
+        roles: ["ROLE_USER", "ROLE_ADMIN", "ROLE_SYSTEM_ADMIN"]
       }
     }, 
     {

@@ -35,6 +35,7 @@ export default {
         { text: "Fuel cost $", value: "fuelCost" },
         { text: "Earning $", value: "earning" },
         { text: "Profit $", value: "profit" },
+        { text: "Info", value: "info" },
         { text: "", value: "actions" }
       ]
     };
